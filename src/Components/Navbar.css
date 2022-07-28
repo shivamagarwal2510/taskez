@@ -1,0 +1,101 @@
+.navbar {
+    position: relative;
+}
+
+.title {
+    position: absolute;
+
+    left: 51px;
+    top: 51px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 101.1%;
+    letter-spacing: 0.03em;
+    color: #161616;
+}
+
+.Overview {
+    position: absolute;
+    display: flex;
+    left: 52px;
+    top: 152px;
+
+}
+
+.Overview img {
+    width: 16.5px;
+    height: 17.28px;
+}
+
+.Overview span {
+    margin-left: 28.75px;
+    color: #9A9A9A;
+}
+
+.Stats {
+    position: absolute;
+    display: flex;
+    left: 52px;
+    top: 210px;
+}
+
+.Stats img {
+    width: 16.5px;
+    height: 17.28px;
+}
+
+.Stats span {
+    margin-left: 28.75px;
+    color: #9A9A9A;
+}
+
+.Projects {
+    position: absolute;
+    display: flex;
+    left: 55.19px;
+    top: 266px;
+}
+
+.Projects img {
+    width: 16.5px;
+    height: 17.28px;
+}
+
+.Projects span {
+    margin-left: 28.75px;
+    color: #212121;
+}
+
+.Chat {
+    position: absolute;
+    display: flex;
+    left: 56px;
+    top: 319px;
+}
+
+.Chat img {
+    width: 16.5px;
+    height: 17.28px;
+}
+
+.Chat span {
+    margin-left: 28.75px;
+    color: #9A9A9A;
+}
+
+.Calendar {
+    position: absolute;
+    display: flex;
+    left: 56px;
+    top: 372px;
+}
+
+.Calendar img {
+    width: 16.5px;
+    height: 17.28px;
+}
+
+.Calendar span {
+    margin-left: 28.75px;
+    color: #9A9A9A;
+}
