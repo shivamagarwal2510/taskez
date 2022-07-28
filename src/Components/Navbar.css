@@ -1,12 +1,10 @@
-.navbar {
-    position: relative;
-}
+
 
 .title {
     position: absolute;
 
     left: 51px;
-    top: 51px;
+    top: 51px; 
     font-weight: 500;
     font-size: 20px;
     line-height: 101.1%;

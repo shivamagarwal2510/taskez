@@ -4,7 +4,7 @@ import Stats from "../images/Stats.svg";
 import Projects from "../images/Projects.svg";
 import Chat from "../images/Chat.svg";
 import Calendar from "../images/Calendar.svg";
-
+import {Link, Outlet} from "react-router-dom";
 const Navbar = ()=>{
     return(
         <>
@@ -19,10 +19,12 @@ const Navbar = ()=>{
                 <img src ={Stats} />
                 <span>Stats</span>
             </li>
+            <Link to="/projects">
             <li className="Projects">
                 <img src ={Projects} />
                 <span>Projects</span>
             </li>
+            </Link>
             <li className="Chat">
                 <img src ={Chat} />
                 <span>Chat</span>
@@ -33,6 +35,7 @@ const Navbar = ()=>{
             </li>
             </ul>
         </div>
+        <Outlet/>
         </>
     )
 }

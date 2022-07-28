@@ -1,7 +1,7 @@
 import "./Projects.css";
 import { useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import filter from "../../images/bi_filter.svg";
 import plus from "../../images/plus.svg";
 import searchIcon from "../../images/searchButton.svg";
@@ -11,7 +11,7 @@ const Projects = () => {
     const Initial = {
         title: "",
         description: "",
-        id:""
+        id: ""
     }
 
     const [displayCompleted, setDisplayCompleted] = useState("none");
@@ -23,6 +23,7 @@ const Projects = () => {
     const [todoList, setTodoList] = useState([]);
     const [inProgressList, setInProgressList] = useState([]);
     const [completedList, setCompletedList] = useState([]);
+
     const handleAddNote = (event) => {
         console.log(event.target.id);
 
@@ -57,26 +58,26 @@ const Projects = () => {
     }
     const handleTitle = (e) => {
         if (e.target.name === "titleTodo") {
-            setInputTodo({ title: e.target.value, description: inputTodo.description});
+            setInputTodo({ title: e.target.value, description: inputTodo.description });
 
         }
         else if (e.target.name === "titleInProgress") {
-            setInputInProgress({ title: e.target.value, description: inputInProgress.description});
+            setInputInProgress({ title: e.target.value, description: inputInProgress.description });
         }
         else if (e.target.name === "titleCompleted") {
-            setInputCompleted({ title: e.target.value, description: inputCompleted.description});
+            setInputCompleted({ title: e.target.value, description: inputCompleted.description });
         }
     }
     const handleDescription = (e) => {
         if (e.target.name === "descriptionTodo") {
-            setInputTodo({ description: e.target.value, title: inputTodo.title, id:uuidv4() });
+            setInputTodo({ description: e.target.value, title: inputTodo.title, id: uuidv4() });
 
         }
         else if (e.target.name === "descriptionInProgress") {
-            setInputInProgress({ description: e.target.value, title: inputInProgress.title, id:uuidv4()});
+            setInputInProgress({ description: e.target.value, title: inputInProgress.title, id: uuidv4() });
         }
         else if (e.target.name === "descriptionCompleted") {
-            setInputCompleted({ description: e.target.value, title: inputCompleted.title, id:uuidv4()});
+            setInputCompleted({ description: e.target.value, title: inputCompleted.title, id: uuidv4() });
         }
     }
     const handleSubmit = (e) => {
@@ -107,6 +108,39 @@ const Projects = () => {
             }
         }
     }
+    const onDragEnd = (result)=>{
+        const {source, destination} = result;
+        const sourceListId = source.droppableId;
+        const destinationListId = destination.droppableId;
+        if(!destinationListId) return;
+        let removed;
+        if(sourceListId==="todoList"){
+            // const todoList = todoList;
+            [removed]=todoList.splice(source.index,1);
+            setTodoList(todoList);
+        }
+        else if(sourceListId==="inProgressList"){
+            [removed] = inProgressList.splice(source.index, 1);
+            setInProgressList(inProgressList);
+        }
+        else if(sourceListId==="completedList"){
+            [removed] = completedList.splice(source.index, 1);
+            setCompletedList(completedList);
+        }
+        if(destinationListId==="todoList"){
+            todoList.splice(destination.index, 0, removed);
+            setTodoList(todoList);
+        }
+        else if(destinationListId==="inProgressList"){
+            inProgressList.splice(destination.index, 0, removed);
+            setInProgressList(inProgressList);
+        }
+        else if(destinationListId==="completedList"){
+            completedList.splice(destination.index, 0, removed);
+            setCompletedList(completedList);
+        }
+
+    }
     console.log(inputTodo);
     console.log(inputInProgress);
     console.log(inputCompleted);
@@ -122,13 +156,15 @@ const Projects = () => {
                     <img src={filter} alt="filter" />
                     <span>Filter</span>
                 </div>
-                <DragDropContext onDragEnd={result => console.log(result)}>
+                <DragDropContext onDragEnd={result => {
+                    onDragEnd(result);
+                    console.log(result);}}>
                     <Droppable droppableId="todoList">
                         {
                             (provided, snapshot) => {
                                 return (
                                     <div className="todo" {...provided.droppableProps} ref={provided.innerRef}>
-                                        
+
                                         <h1>To do</h1>
                                         <button id="todo" className="add" onClick={handleAddNote}><img className="addImg" src={plus} /></button>
                                         <div className="addNoteInput" style={{ display: displayTodo }}>
@@ -137,38 +173,57 @@ const Projects = () => {
                                                 <textarea className="descriptionInput" type="text" onChange={handleDescription} name="descriptionTodo" value={inputTodo.description} placeholder="Description.." />
                                             </form>
                                         </div>
-                                        
-                                            <CardList list={todoList} />
-                                       
+
+                                        <CardList list={todoList} />
+                                        {provided.placeholder}
                                     </div>
                                 )
                             }
                         }
 
                     </Droppable >
+                    <Droppable droppableId="inProgressList">
+                        {
+                            (provided, snapshot) => {
+                                return (
+                                    <div className="inProgress" {...provided.droppableProps} ref={provided.innerRef}>
+                                        <h1>InProgress</h1>
+                                        <button id="inProgress" className="add" onClick={handleAddNote}><img className="addImg" src={plus} /></button>
+                                        <div className="addNoteInput" style={{ display: displayInProgress }}>
+                                            <form onKeyPress={handleSubmit}>
+                                                <input className="titleInput" type="text" onChange={handleTitle} name="titleInProgress" value={inputInProgress.title} placeholder="Give your task a title" />
+                                                <textarea className="descriptionInput" type="textInProgress" onChange={handleDescription} name="descriptionInProgress" value={inputInProgress.description} placeholder="Description.." />
+                                            </form>
+                                        </div>
+                                        <CardList list={inProgressList} />
+                                        {provided.placeholder}
+                                    </div>
+                                )
+                            }
+                        }
 
-                    <div className="inProgress">
-                        <h1>InProgress</h1>
-                        <button id="inProgress" className="add" onClick={handleAddNote}><img className="addImg" src={plus} /></button>
-                        <div className="addNoteInput" style={{ display: displayInProgress }}>
-                            <form onKeyPress={handleSubmit}>
-                                <input className="titleInput" type="text" onChange={handleTitle} name="titleInProgress" value={inputInProgress.title} placeholder="Give your task a title" />
-                                <textarea className="descriptionInput" type="textInProgress" onChange={handleDescription} name="descriptionInProgress" value={inputInProgress.description} placeholder="Description.." />
-                            </form>
-                        </div>
-                        <CardList list={inProgressList} />
-                    </div>
-                    <div className="completed">
-                        <h1>Completed</h1>
-                        <button id="completed" onClick={handleAddNote} className="add"><img className="addImg" src={plus} /></button>
-                        <div className="addNoteInput" style={{ display: displayCompleted }}>
-                            <form onKeyPress={handleSubmit}>
-                                <input className="titleInput" type="text" value={inputCompleted.title} onChange={handleTitle} name="titleCompleted" placeholder="Give your task a title" />
-                                <textarea className="descriptionInput" type="text" onChange={handleDescription} name="descriptionCompleted" value={inputCompleted.description} placeholder="Description.." />
-                            </form>
-                        </div>
-                        <CardList list={completedList} />
-                    </div>
+                    </Droppable>
+                    <Droppable droppableId="completedList">
+                        {
+                            (provided, snapshot) => {
+                                return (
+                                    <div className="completed" {...provided.droppableProps} ref={provided.innerRef}>
+                                        <h1>Completed</h1>
+                                        <button id="completed" onClick={handleAddNote} className="add"><img className="addImg" src={plus} /></button>
+                                        <div className="addNoteInput" style={{ display: displayCompleted }}>
+                                            <form onKeyPress={handleSubmit}>
+                                                <input className="titleInput" type="text" value={inputCompleted.title} onChange={handleTitle} name="titleCompleted" placeholder="Give your task a title" />
+                                                <textarea className="descriptionInput" type="text" onChange={handleDescription} name="descriptionCompleted" value={inputCompleted.description} placeholder="Description.." />
+                                            </form>
+                                        </div>
+                                        <CardList list={completedList} />
+                                       {provided.placeholder}
+                                    </div>
+                                )
+                            }
+                        }
+
+                    </Droppable>
                 </DragDropContext>
             </div>
         </>

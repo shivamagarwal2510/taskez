@@ -1,0 +1,106 @@
+.signup__line {
+    position: absolute;
+    width: 17px;
+    height: 0px;
+    left: 922px;
+    top: 254px;
+  
+    border: 3px solid #1a3b58;
+  }
+  .signup__longline {
+    position: absolute;
+    width: 314px;
+    height: 0px;
+    left: 886px;
+    top: 290px;
+    border: 2px solid rgba(64, 145, 223, 0.12);
+  }
+  .username{
+      box-sizing: border-box;
+  
+  position: absolute;
+  width: 329px;
+  height: 52px;
+  left: 886px;
+  top: 324px;
+  
+  background: #FFFFFF;
+  border: 1px solid #CBDBEA;
+  border-radius: 8px;
+  font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 103.38%;
+    /* or 14px */
+  
+    padding-left: 15px;
+  }
+  .username__error{
+       position: absolute;
+  width: 126px;
+  height: 13px;
+  left: 989px;
+  top: 369px;
+  
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  /* identical to box height */
+  
+  
+  color: #F65B2A;
+  }
+  .signup__btn{
+  top: 564px;
+  }
+  .login__image{
+    position: absolute;
+        left: 7.53%;
+        right: 59.34%;
+        top: 25.44%;
+        bottom: 27.89%;
+}
+.rectangle__image{
+    position: absolute;
+        width: 570px;
+        height: 644px;
+        left: 758px;
+        top: 128px;
+    
+        background: #FFFFFF;
+        border: 2px solid rgba(26, 59, 88, 0.24);
+        border-radius: 65px;
+}
+.signup__content1 {
+    position: absolute;
+    width: 114px;
+    height: 26px;
+    left: 919px;
+    top: 216px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 101.1%;
+    /* or 26px */color: #1A3B58;
+    
+}
+.login__content1 {
+    position: absolute;
+    width: 77px;
+    height: 26px;
+    left: 819px;
+    top: 216px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 101.1%;
+    /* or 26px */
+    color: rgba(26, 59, 88, 0.33);
+}
