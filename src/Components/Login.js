@@ -14,10 +14,7 @@ import { UserContext } from '../contexts/user.context';
 const Login = () => {
     const {setCurrentUser} = useContext(UserContext);
     const navigate = useNavigate();
-  const signInWithGoogle = async()=>{
-    const {user}= await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
-  }
+ 
 
   const initialValues = { email: "", password: "" }
   const [formValues, setFormValues] = useState(initialValues);
@@ -92,7 +89,6 @@ const Login = () => {
         <input type="password" placeholder='Password' className='password' name="password" onChange={handleChange} />
         <p className='password__error'>{formErrors.password}</p>
         <button type="submit" className='btn login__btn' >Log In</button>
-        <button type="button" className='btn google__popup' onClick={signInWithGoogle}>Log In with Google</button>
       </form>
     </div>
   )
